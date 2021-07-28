@@ -31,14 +31,25 @@ from airbyte_cdk.sources import AbstractSource
 from airbyte_cdk.sources.streams import Stream
 from airbyte_cdk.sources.streams.http.auth import Oauth2Authenticator
 
-from .common import Config
-from .streams import Profiles
+from .common import Config, SourceContext
+from .streams import (
+    Profiles,
+    SponsoredDisplayAdGroups,
+    SponsoredDisplayCampaigns,
+    SponsoredDisplayCreatives,
+    SponsoredDisplayProductAds,
+    SponsoredDisplayTargetings,
+)
 
 TOKEN_URL = "https://api.amazon.com/auth/o2/token"
 
 
 # Source
 class SourceAmazonAds(AbstractSource):
+    def __init__(self):
+        super().__init__()
+        self.ctx = SourceContext()
+
     def check_connection(self, logger: AirbyteLogger, config: Mapping[str, Any]) -> Tuple[bool, any]:
         """
         :param config:  the user-input config object conforming to the connector's spec.json
@@ -58,7 +69,14 @@ class SourceAmazonAds(AbstractSource):
 
         config = Config(**config)
         auth = self._make_authenticator(config)
-        return [Profiles(config, authenticator=auth)]
+        return [
+            Profiles(config, context=self.ctx, authenticator=auth),
+            SponsoredDisplayCampaigns(config, context=self.ctx, authenticator=auth),
+            SponsoredDisplayAdGroups(config, context=self.ctx, authenticator=auth),
+            SponsoredDisplayProductAds(config, context=self.ctx, authenticator=auth),
+            SponsoredDisplayTargetings(config, context=self.ctx, authenticator=auth),
+            SponsoredDisplayCreatives(config, context=self.ctx, authenticator=auth),
+        ]
 
     @staticmethod
     def _make_authenticator(config: Config):

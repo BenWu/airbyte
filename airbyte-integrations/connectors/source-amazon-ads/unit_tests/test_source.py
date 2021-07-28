@@ -24,7 +24,7 @@
 
 import responses
 from airbyte_cdk.models import AirbyteMessage, Type
-from jsonschema import validate
+from jsonschema import Draft4Validator
 from source_amazon_ads import SourceAmazonAds
 
 
@@ -34,7 +34,7 @@ def test_discover(test_config):
     catalog = AirbyteMessage(type=Type.CATALOG, catalog=catalog).dict(exclude_unset=True)
     schemas = [stream["json_schema"] for stream in catalog["catalog"]["streams"]]
     for schema in schemas:
-        validate(schema=schema, instance={})
+        Draft4Validator.check_schema(schema)
 
 
 @responses.activate

@@ -21,10 +21,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
+from .profile import Profile, Types
+from .sponsored_display import DisplayAdGroup, DisplayCampaign, DisplayCreatives, DisplayProductAds, DisplayTargeting
 
-
-def test_dummy():
-    """
-    Dummy test to prevent gradle from failing test for this connector
-    """
-    assert True
+__all__ = [
+    "Types",
+    "Profile",
+    "DisplayAdGroup",
+    "DisplayCampaign",
+    "DisplayCreatives",
+    "DisplayProductAds",
+    "DisplayTargeting",
+]

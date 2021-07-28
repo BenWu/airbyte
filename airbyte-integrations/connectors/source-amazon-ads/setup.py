@@ -27,7 +27,7 @@ from setuptools import find_packages, setup
 
 MAIN_REQUIREMENTS = ["airbyte-cdk", "requests_oauthlib==1.3.0"]
 
-TEST_REQUIREMENTS = ["pytest~=6.1", "source-acceptance-test", "jsonschema", "responses"]
+TEST_REQUIREMENTS = ["pytest~=6.1", "pytest-mock", "source-acceptance-test", "jsonschema", "responses"]
 
 setup(
     name="source_amazon_ads",

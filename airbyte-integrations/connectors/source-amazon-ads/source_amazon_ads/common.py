@@ -22,7 +22,12 @@
 # SOFTWARE.
 #
 
+from dataclasses import dataclass, field
+from typing import List
+
 from pydantic import BaseModel
+
+from .schemas.profile import Profile
 
 
 class Config(BaseModel):
@@ -30,3 +35,15 @@ class Config(BaseModel):
     client_secret: str
     scope: str
     refresh_token: str
+
+
+@dataclass
+class PageToken:
+    offset: int = 0
+
+
+@dataclass
+class SourceContext:
+    profiles: List[Profile] = field(default_factory=list)
+    current_profile_id: str = None
+    current_token: PageToken = field(default_factory=PageToken)
