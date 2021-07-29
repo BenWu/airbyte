@@ -87,7 +87,7 @@ def setup_responses(
 def test_streams_profile(test_config, profiles_response):
     source = SourceAmazonAds()
     streams = source.streams(test_config)
-    assert len(streams) == 6
+    assert len(streams) == 7
     profile_stream = streams[0]
     assert profile_stream.name == "profiles"
     schema = profile_stream.get_json_schema()

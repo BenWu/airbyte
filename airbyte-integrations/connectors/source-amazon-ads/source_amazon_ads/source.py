@@ -32,6 +32,7 @@ from airbyte_cdk.sources.streams import Stream
 from airbyte_cdk.sources.streams.http.auth import Oauth2Authenticator
 
 from .common import Config, SourceContext
+from .report_streams import DisplayReportStream
 from .streams import (
     Profiles,
     SponsoredDisplayAdGroups,
@@ -76,6 +77,7 @@ class SourceAmazonAds(AbstractSource):
             SponsoredDisplayProductAds(config, context=self.ctx, authenticator=auth),
             SponsoredDisplayTargetings(config, context=self.ctx, authenticator=auth),
             SponsoredDisplayCreatives(config, context=self.ctx, authenticator=auth),
+            DisplayReportStream(config, context=self.ctx, authenticator=auth),
         ]
 
     @staticmethod

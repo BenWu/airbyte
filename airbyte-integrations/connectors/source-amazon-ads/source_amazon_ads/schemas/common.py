@@ -50,3 +50,10 @@ class JSEnum(str, Enum):
     def __modify_schema__(cls, schema):
         schema.pop("title", None)
         schema.pop("description", None)
+
+
+class MetricsReport(JSModel):
+    profileId: int
+    recordType: str
+    reportDate: str
+    metric: Dict[str, str]

@@ -29,6 +29,8 @@ from pydantic import BaseModel
 
 from .schemas.profile import Profile
 
+URL_BASE = "https://advertising-api.amazon.com/"
+
 
 class Config(BaseModel):
     client_id: str
